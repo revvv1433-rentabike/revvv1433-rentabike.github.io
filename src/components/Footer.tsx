@@ -86,7 +86,7 @@ export default function Footer() {
             Minimum age: 18 years | Valid driver's license required | Helmets provided
           </p>
           <p className="text-gray-500 text-xs mt-2">
-            Designed by Ganesh , Athesh & Co with ❤️
+            Designed by Ganesh 
           </p>
         </div>
       </div>

@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://www.tirupathibikerentals.com",
+  "homepage": "https://tirupathibikerentals.com",
 
   "scripts": {
     "dev": "vite",
