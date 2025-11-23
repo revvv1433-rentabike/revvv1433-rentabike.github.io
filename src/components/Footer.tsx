@@ -23,11 +23,21 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-yellow-400">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#home" className="text-gray-400 hover:text-yellow-400 transition">Home</a></li>
-              <li><a href="#fleet" className="text-gray-400 hover:text-yellow-400 transition">Our Fleet</a></li>
-              <li><a href="#about" className="text-gray-400 hover:text-yellow-400 transition">About Us</a></li>
-              <li><a href="#contact" className="text-gray-400 hover:text-yellow-400 transition">Contact</a></li>
-              <li><a href="#temples" className="text-gray-400 hover:text-yellow-400 transition">Temples Nearby</a></li>
+              <li>
+                <a href="/" className="text-gray-400 hover:text-yellow-400 transition">Home</a>
+              </li>
+              <li>
+                <a href="/#fleet" className="text-gray-400 hover:text-yellow-400 transition">Our Fleet</a>
+              </li>
+              <li>
+                <a href="/about" className="text-gray-400 hover:text-yellow-400 transition">About Us</a>
+              </li>
+              <li>
+                <a href="/contact" className="text-gray-400 hover:text-yellow-400 transition">Contact</a>
+              </li>
+              <li>
+                <a href="/#TemplesNearby" className="text-gray-400 hover:text-yellow-400 transition">Temples Nearby</a>
+              </li>
             </ul>
           </div>
 
@@ -64,13 +74,13 @@ export default function Footer() {
             <div className="mt-6">
               <h4 className="font-semibold mb-3 text-yellow-400">Follow Us</h4>
               <div className="flex gap-3">
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
+                <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
                   <Facebook size={18} />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
+                <a href="https://www.instagram.com/revvv143?igsh=bTZqZWVsaG1oaGlm" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
                   <Instagram size={18} />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-gray-900 transition">
                   <Twitter size={18} />
                 </a>
               </div>
@@ -86,7 +96,7 @@ export default function Footer() {
             Minimum age: 18 years | Valid driver's license required | Helmets provided
           </p>
           <p className="text-gray-500 text-xs mt-2">
-            Designed by Ganesh 
+            Designed by Ganesh , Athesh and co with ❤️
           </p>
         </div>
       </div>
