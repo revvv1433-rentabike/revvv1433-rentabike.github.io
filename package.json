@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "type": "module",
   "homepage": "https://tirupathibikerentals.com",
-
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,16 +13,15 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
     "lucide-react": "^0.344.0",
     "mongodb": "^6.20.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.6"
   },
-
   "devDependencies": {
     "@eslint/js": "^9.9.1",
     "@types/react": "^18.3.5",
