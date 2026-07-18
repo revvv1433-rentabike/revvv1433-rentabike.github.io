@@ -252,6 +252,7 @@ export default function Contact() {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
 
           {/* Branch C */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -308,6 +309,8 @@ export default function Contact() {
               </div>
             </div>
           </div>
+=======
+>>>>>>> 9aefc12bbd4b5c0e7c3cea595167893ada794f9f
         </div>
 
       </div>
