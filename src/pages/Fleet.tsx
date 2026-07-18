@@ -53,6 +53,7 @@ export default function Fleet() {
 
   useEffect(() => {
     const sampleBikes: Bike[] = [
+      { _id: 'access125', name: 'Access 125', model: 'Scooty', images: ['https://imgd.aeplcdn.com/1056x594/n/i2tsjfb_1820545.jpeg?q=80','https://cdn.suzukimotorcycle.co.in/public-live/uploads/color-images/original/Absolute-Side-Mat-Blue-White-and-Black-Drum-images-650X428-01.jpg'], price5Hours: 300, price1Day: 600, price2Days: 1100, extraKmCharge: 3, available: true, features: ['Automatic', 'Matte Black', 'Blue Option'], color: 'Matte Black / Blue' },
       { _id: '1', name: 'Activa 6G', model: 'Automatic Scooter', images: ['https://images.drivespark.com/ph-big/2020/01/honda-activa-6g-6.jpg','https://cdn.bikedekho.com/processedimages/honda/activa-6g/source/activa-6g67ff4b458ea89.jpg?imwidth=360&impolicy=resize'], price5Hours: 300, price1Day: 600, price2Days: 1100, extraKmCharge: 3, available: true, features: ['Automatic', 'Fuel Efficient', 'Comfortable'], color: 'Black & Red' },
         { _id: '2', name: 'Jupiter 110cc', model: 'Scooty', images: ['https://imgd.aeplcdn.com/1056x594/n/ahvh7eb_1768799.jpg?q=80'], price5Hours: 250, price1Day: 500, price2Days: 1000, extraKmCharge: 3, available: true, features: ['Automatic'], color: 'Blue' },
 
@@ -75,7 +76,7 @@ export default function Fleet() {
       { _id: '8', name: 'Swift Dzire', model: 'Sedan Car', images: ['https://mda.spinny.com/sp-file-system/public/2025-04-21/7a016e96505c41849d52c11137d5d06d/raw/file.JPG'], price5Hours: 1000, price1Day: 2300, price2Days: 4500, extraKmCharge: 10, available: true, features: ['4-Seater', 'Automatic', 'Air Conditioned'], color: 'Silver' },
       { _id: '9', name: 'Maruti Ertiga', model: '7-Seater MUV', images: ['https://static-cdn.cars24.com/prod/new-car-cms/Ertiga_Tour_Feature_Image_80388009fd.png'], price5Hours: 1500, price1Day: 4000, price2Days: 7500, extraKmCharge: 18, available: true, features: ['7-Seater', 'Family Vehicle', 'Spacious'], color: 'White' },
       { _id: '10', name: 'Kia Carens', model: 'Premium MUV', images: ['https://imgd.aeplcdn.com/664x374/n/cw/ec/174325/carens-exterior-left-front-three-quarter.jpeg?isig=0&q=80'], price5Hours: 1500, price1Day: 4000, price2Days: 7500, extraKmCharge: 18, available: true, features: ['7-Seater', 'Premium', 'Advanced Features'], color: 'Black' },
-      { _id: '11', name: 'Innova Crysta', model: 'Luxury MUV', images: ['https://www.v3cars.com/media/model-imgs/1666248141-Innova%20Crysta-Exterior.webp'], price5Hours: 1500, price1Day: 4000, price2Days: 7500, extraKmCharge: 18, available: true, features: ['8-Seater', 'Luxury', 'Spacious Interior'], color: 'Black Pearl' },
+      { _id: '11', name: 'Innova Crysta', model: 'Luxury MUV', images: ['https://imgd.aeplcdn.com/664x374/n/cw/ec/222736/innova-crysta-2026-exterior-right-front-three-quarter.png?isig=0&q=80'], price5Hours: 1500, price1Day: 4000, price2Days: 7500, extraKmCharge: 18, available: true, features: ['8-Seater', 'Luxury', 'Spacious Interior'], color: 'Black Pearl' },
       { _id: '20', name: 'Maruti Baleno', model: 'Hatchback', images: ['https://images.drivespark.com/ph-big/2019/01/maruti-baleno-exterior-2.jpg','https://stimg.cardekho.com/images/car-images/large/Rolls-Royce/Ghost-Series-II/12399/1739005503453/Pearl-Arctic-White_ffffff.jpg?impolicy=resize&imwidth=420'], price5Hours: 900, price1Day: 2000, price2Days: 3800, extraKmCharge: 10, available: true, features: ['Hatchback', 'Comfortable', 'Fuel Efficient'], color: 'Pearl White' },
       { _id: '21', name: 'Toyota Glanza', model: 'Hatchback', images: ['https://i.pinimg.com/736x/c4/5c/49/c45c491a2b03ea5ae3ed35ab25c5826f.jpg','https://www.galaxytoyota.in/public/storage/1028/car-light-grey.png'], price5Hours: 900, price1Day: 2000, price2Days: 3800, extraKmCharge: 10, available: true, features: ['Hatchback', 'Reliable', 'AC'], color: 'Silver' },
       { _id: '22', name: 'Maruti Swift', model: 'Hatchback', images: ['https://i.pinimg.com/736x/9d/54/ff/9d54ff0b722180b73da61ca9f68f9bf5.jpg','https://www.autovista.in/assets/img/new_cars_colour_variants/swift-colour-solid-fire-red.jpg'], price5Hours: 900, price1Day: 2000, price2Days: 3800, extraKmCharge: 10, available: true, features: ['Compact', 'Fuel Efficient', 'Easy Parking'], color: 'Red' },
@@ -91,7 +92,7 @@ export default function Fleet() {
   // categories grouped for display
   const categoryBikes = useMemo(
     () => ({
-      scooters: bikes.filter((b) => ['Activa 6G', 'Jupiter 110cc','Jupiter 125cc', 'Fascino 125cc', 'Dio 125', 'Aprilia SR 160'].includes(b.name)),
+      scooters: bikes.filter((b) => ['Access 125', 'Activa 6G', 'Jupiter 110cc','Jupiter 125cc', 'Fascino 125cc', 'Dio 125', 'Aprilia SR 160'].includes(b.name)),
       bikes: bikes.filter((b) => ['Honda Shine', 'Passion Pro', 'Bajaj Pulsar', 'Royal Enfield Bullet', 'GT 650','KTM Duke 200', 'Yamaha FZ', 'Yamaha MT-15', 'Yamaha R15 V3', 'Suzuki Gixxer 250'].includes(b.name)),
       cars: bikes.filter((b) => ['Swift Dzire', 'Maruti Ertiga', 'Kia Carens', 'Innova Crysta', 'Maruti Baleno', 'Toyota Glanza', 'Maruti Swift', 'Hyundai i20', 'Hyundai i10', 'Maruti Brezza','Maruti Victoris'].includes(b.name)),
     }),
