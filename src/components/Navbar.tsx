@@ -54,9 +54,9 @@ export default function Navbar({ onLoginClick, onCartClick }: NavbarProps) {
                 />
               </Link>
 
-              <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-gray-900 leading-none">Rent A Bike</h1>
-                <p className="text-xs text-gray-600 leading-none">Tirupati Bike Rentals</p>
+              <div className="block">
+                <h1 className="text-base sm:text-lg font-bold text-gray-900 leading-none">Rent A Bike</h1>
+                <p className="text-[10px] sm:text-xs text-gray-600 leading-none">Tirupati Bike Rentals</p>
               </div>
             </div>
 
