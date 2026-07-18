@@ -21,11 +21,11 @@ type Temple = { id: string; name: string; distance: string; location: string; de
 /* ---------------- SAMPLE DATA ---------------- */
 const SAMPLE_BIKES: Bike[] = [
   // Scooters
-  { _id: 'access125', name: 'Access 125', model: 'Scooty', images: ['https://imgd.aeplcdn.com/1056x594/n/i2tsjfb_1820545.jpeg?q=80', 'https://cdn.suzukimotorcycle.co.in/public-live/uploads/color-images/original/Absolute-Side-Mat-Blue-White-and-Black-Drum-images-650X428-01.jpg'], price5Hours: 300, price1Day: 600, price2Days: 1100, extraKmCharge: 3, available: true, features: ['Automatic', 'Matte Black', 'Blue Option'], color: 'Matte Black / Blue' },
+  { _id: 'access125', name: 'Access 125', model: 'Scooty', images: ['https://imgd.aeplcdn.com/1056x594/n/i2tsjfb_1820545.jpeg?q=80', 'https://cdn.suzukimotorcycle.co.in/public-live/uploads/color-images/original/Absolute-Side-Mat-Blue-White-and-Black-Drum-images-650X428-01.jpg'], price5Hours: 300, price1Day: 600, price2Days: 0, extraKmCharge: 3, available: true, features: ['Automatic', 'Matte Black', 'Blue Option'], color: 'Matte Black / Blue' },
   { _id: '1', name: 'Activa 6G', model: 'Automatic Scooter', images: ['https://images.drivespark.com/ph-big/2020/01/honda-activa-6g-6.jpg'], price5Hours: 300, price1Day: 600, price2Days: 1100, extraKmCharge: 3, available: true, features: ['Automatic'], color: 'Black & Red' },
   { _id: 'j110', name: 'Jupiter 110cc', model: 'Scooty', images: ['https://imgd.aeplcdn.com/1056x594/n/ahvh7eb_1768799.jpg?q=80'], price5Hours: 250, price1Day: 500, price2Days: 950, extraKmCharge: 3, available: true, features: ['Automatic'], color: 'Gray' },
 
-  { _id: '2', name: 'Jupiter 125cc', model: 'Scooty', images: ['https://cdn.bikedekho.com/processedimages/tvs/jupiter-125/source/jupiter-125683832695bac3.jpg'], price5Hours: 300, price1Day: 600, price2Days: 1100, extraKmCharge: 3, available: true, features: ['Automatic'], color: 'Blue' },
+  { _id: '2', name: 'Jupiter 125cc', model: 'Scooty', images: ['https://cdn.bikedekho.com/processedimages/tvs/jupiter-125/source/jupiter-125683832695bac3.jpg'], price5Hours: 300, price1Day: 600, price2Days: 0, extraKmCharge: 3, available: true, features: ['Automatic'], color: 'Blue' },
   { _id: '3', name: 'Fascino 125cc', model: 'Scooty', images: ['https://www.yamaha-motor-india.com/theme/v3/image/fascino125fi-new/color/Disc/YELLOW-COCKTAIL-STD.png'], price5Hours: 300, price1Day: 600, price2Days: 1100, extraKmCharge: 3, available: true, features: ['Automatic'], color: 'Yellow' },
   { _id: 'd1', name: 'Dio 125', model: '125cc Scooter', images: ['https://acko-cms.ackoassets.com/Honda_Dio_125_932a6fe56e.jpg'], price5Hours: 320, price1Day: 650, price2Days: 1200, extraKmCharge: 3, available: true, features: ['Automatic', 'Peppy'], color: 'Matte Black' },
   { _id: 'd2', name: 'Aprilia SR 160', model: '160cc Sport Scooter', images: ['https://apriliaindia.com/images/SR_160_Race.jpg'], price5Hours: 500, price1Day: 1200, price2Days: 2200, extraKmCharge: 4, available: true, features: ['Sporty', 'Powerful'], color: 'Racing Black' },
@@ -94,8 +94,9 @@ function useToasts() {
 /* ------------------ BikeCard (no Custom) ------------------ */
 function BikeCard({ bike, onAddToCart, showToast }: { bike: Bike; onAddToCart: (bike: Bike, duration: string, startDate: string, priceSnapshot: number, totalPrice: number) => void; showToast: (msg: string, type?: ToastType) => void; }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedDuration, setSelectedDuration] = useState<'5hours' | '1day' | '2days'>('1day');
+  const [selectedDuration, setSelectedDuration] = useState<'1day' | '2days'>('1day');
   const [startDate, setStartDate] = useState<string>('');
+  const availableDurations = bike.price2Days > 0 ? (['1day','2days'] as const) : (['1day'] as const);
 
   useEffect(() => setCurrentImageIndex(0), [bike]);
 
@@ -103,21 +104,19 @@ function BikeCard({ bike, onAddToCart, showToast }: { bike: Bike; onAddToCart: (
   const prevImage = () => setCurrentImageIndex((p) => (p - 1 + bike.images.length) % bike.images.length);
 
   const getPrice = (): number => {
-    if (selectedDuration === '5hours') return bike.price5Hours ?? 0;
-    if (selectedDuration === '2days') return bike.price2Days ?? (bike.price1Day ?? 0) * 2;
+    if (selectedDuration === '2days') return bike.price2Days > 0 ? bike.price2Days : (bike.price1Day ?? 0) * 2;
     return bike.price1Day ?? 0;
   };
 
   const getDurationLabel = () => {
-    return selectedDuration === '5hours' ? '5 Hours' : selectedDuration === '2days' ? '2 Days' : '1 Day';
+    return selectedDuration === '2days' ? '2 Days' : '1 Day';
   };
 
   const handleAddToCart = () => {
     if (!startDate) { showToast('Please select a start date', 'error'); return; }
-    const priceSnapshot = selectedDuration === '5hours' ? (bike.price5Hours ?? 0) : selectedDuration === '2days' ? (bike.price2Days ?? (bike.price1Day ?? 0) * 2) : (bike.price1Day ?? 0);
+    const priceSnapshot = selectedDuration === '2days' ? (bike.price2Days > 0 ? bike.price2Days : (bike.price1Day ?? 0) * 2) : (bike.price1Day ?? 0);
     const totalPrice = priceSnapshot;
     onAddToCart(bike, selectedDuration, startDate, priceSnapshot, totalPrice);
-    // showToast is called at parent sometimes — but having an immediate positive toast here helps feedback
     showToast(`Added ${bike.name} — ₹${totalPrice} to cart`, 'success');
   };
 
@@ -158,9 +157,9 @@ function BikeCard({ bike, onAddToCart, showToast }: { bike: Bike; onAddToCart: (
 
         <div className="space-y-3 mb-4">
           <div className="flex gap-2">
-            {['5hours', '1day', '2days'].map(d => (
-              <button key={d} onClick={() => setSelectedDuration(d as any)} className={`flex-1 py-2 rounded-lg text-xs sm:text-sm font-medium ${selectedDuration === d ? 'bg-yellow-400 text-gray-900' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-                {d === '5hours' ? '5H' : d === '1day' ? '1D' : '2D'}
+            {availableDurations.map((duration) => (
+              <button key={duration} onClick={() => setSelectedDuration(duration)} className={`flex-1 py-2 rounded-lg text-xs sm:text-sm font-medium ${selectedDuration === duration ? 'bg-yellow-400 text-gray-900' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                {duration === '1day' ? '1D' : '2D'}
               </button>
             ))}
           </div>

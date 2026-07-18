@@ -20,9 +20,10 @@ type Toast = { id: string; message: string; type?: 'success' | 'error' | 'info' 
 
 export default function BikeCard({ bike, onAddToCart }: BikeCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [selectedDuration, setSelectedDuration] = useState<'5hours' | '1day' | '2days'>('1day');
+  const [selectedDuration, setSelectedDuration] = useState<'1day' | '2days'>('1day');
   const [startDate, setStartDate] = useState<string>('');
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const availableDurations = bike.price2Days > 0 ? (['1day','2days'] as const) : (['1day'] as const);
 
   // --- simple toast helpers (local to the card) ---
   const pushToast = (message: string, type: Toast['type'] = 'info') => {
@@ -42,26 +43,17 @@ export default function BikeCard({ bike, onAddToCart }: BikeCardProps) {
 
   // --- pricing logic (keeps parity with Fleet computePriceDetails) ---
   // returns { unitPrice, totalPrice } for the chosen quick duration (quantity assumed 1)
-  const computeQuickPrice = (duration: '5hours' | '1day' | '2days') => {
+  const computeQuickPrice = (duration: '1day' | '2days') => {
     if (!bike) return { unitPrice: 0, totalPrice: 0 };
-
-    if (duration === '5hours') {
-      // treat price5Hours as total for 5 hours => per-hour = price5Hours/5
-      const perHour = bike.price5Hours ? Math.round(bike.price5Hours / 5) : Math.round((bike.price1Day || 0) / 8);
-      const unitPrice = perHour; // unit used when displayed as per-hour
-      const totalPrice = perHour * 5; // show total for 5 hours
-      return { unitPrice, totalPrice };
-    }
 
     if (duration === '1day') {
       const unitPrice = bike.price1Day || 0;
-      const totalPrice = unitPrice * 1;
+      const totalPrice = unitPrice;
       return { unitPrice, totalPrice };
     }
 
-    // duration === '2days'
-    const totalFor2 = bike.price2Days || (bike.price1Day || 0) * 2;
-    const unitPrice = Math.round(totalFor2 / 2); // average per day
+    const totalFor2 = bike.price2Days > 0 ? bike.price2Days : (bike.price1Day || 0) * 2;
+    const unitPrice = Math.round(totalFor2 / 2);
     const totalPrice = totalFor2;
     return { unitPrice, totalPrice };
   };
@@ -73,7 +65,6 @@ export default function BikeCard({ bike, onAddToCart }: BikeCardProps) {
 
   const getDurationLabel = () => {
     const labels: Record<string,string> = {
-      '5hours': '5 Hours',
       '1day': '1 Day (24 Hrs)',
       '2days': '2 Days (48 Hrs)',
     };
@@ -156,7 +147,7 @@ export default function BikeCard({ bike, onAddToCart }: BikeCardProps) {
 
         <div className="space-y-3 mb-4">
           <div className="flex gap-2 flex-wrap">
-            {(['5hours','1day','2days'] as const).map((duration) => (
+            {availableDurations.map((duration) => (
               <button
                 key={duration}
                 onClick={() => setSelectedDuration(duration)}
@@ -164,7 +155,7 @@ export default function BikeCard({ bike, onAddToCart }: BikeCardProps) {
                   selectedDuration === duration ? 'bg-yellow-400 text-gray-900' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {duration === '5hours' ? '5H' : duration === '1day' ? '1D' : '2D'}
+                {duration === '1day' ? '1D' : '2D'}
               </button>
             ))}
           </div>
